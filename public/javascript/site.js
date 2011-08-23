@@ -15,13 +15,20 @@ $(document).ready(function() {
     var pos = to_text(sibs[0]) + "-" + to_text(sibs[1]);
     var family = sibs[3].children[0].text;
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
+
+    // Set color
+    $(this).closest("tr").siblings().removeClass("selected_color");
+    $(this).parents("tr").toggleClass("selected_color");
+
     $("#analysis_image").attr('src', img_src);
+    $("#analysis_data").text(pos);
   });
 
   $(".load_family_image").click(function(){
     var family = $(this).text();
     var img_src = base_image() + 'families/' + family + '.png';
     $("#analysis_image").attr('src', img_src);
+    $("#analysis_data").text(family);
   });
 });
 

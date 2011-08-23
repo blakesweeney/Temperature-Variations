@@ -5,9 +5,35 @@ $.tablesorter.addParser({
   type: 'numeric'
 });
 
+$.tablesorter.addParser({
+  id: 'bpfamily',
+  is: function(s) { return false; },
+  format: function(s) { 
+    return s.toLowerCase().
+      replace(/cww/,1).
+      replace(/tww/,2).
+      replace(/cwh/,3).
+      replace(/twh/,4).
+      replace(/cws/,5).
+      replace(/tws/,6).
+      replace(/chh/,7).
+      replace(/thh/,8).
+      replace(/chs/,8).
+      replace(/ths/,10).
+      replace(/css/,11).
+      replace(/tss/,12)
+    },
+    type: 'numeric'
+});
+
 $(document).ready(function() {
 
-  $("#position-table").tablesorter({ sortList: [[0, 0]] });
+  $("#position-table").tablesorter({ 
+    sortList: [[0, 0]],
+    headers: { 
+      3: { sorter: 'bpfamily' }
+    }
+  });
 
   $(".load_analysis_image").click(function(){
     var sibs = $(this).parent().siblings();

@@ -4,7 +4,7 @@ set :enviroment, ENV['RACK_ENV'].to_sym
 set :app_file, 'site.rb'
 disable :run
 
-log = ::File.new("logs/sinatra.log", "a")
+log = ::File.new("log/sinatra.log", "a")
 $stdout.reopen(log)
 $stderr.reopen(log)
 

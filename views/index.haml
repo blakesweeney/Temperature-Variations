@@ -1,1 +1,27 @@
+.container_12
+  .grid_12
+    %center
+      %h1 Temperature Variation and Base Pairs
 
+  .grid_8
+    %table{:id => 'position-table', :class => "tablesorter"}
+      %thead
+        %tr 
+          %th Position 1
+          %th Position 2
+          %th Sequence
+          %th Base Pair Family
+          %th Analysis
+      %tbody
+        - @data.each do |point|
+          %tr
+            %td= point['positions'][0]
+            %td= point['positions'][1]
+            %td= point['sequence']
+            %td 
+              %a{:href => "/family/" + point['family']}= point['family']
+            %td{:class => point['family'] + point['positions'].join('-')}
+              %a{:class => 'load_analysis_image', :href => '#'} Load
+
+  .grid_4
+    %img{:id => "analysis_image"}

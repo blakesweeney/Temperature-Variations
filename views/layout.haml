@@ -1,0 +1,15 @@
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" => "en", 
+  :lang => "en"}
+  %head
+    %script{:src => 'javascript/jquery.js'}
+    %script{:src => 'javascript/jquery.tablesorter.js'}
+    %script{:src => 'javascript/site.js'}
+    %link{:rel => "stylesheet/less", :href => 'stylesheets/main.less',
+      :type => 'text/css'}
+    %script{:src => 'javascript/less.js'}
+    %link{:rel => "stylesheet", :media => 'all', :href => 'stylesheets/960.css',
+      :type => 'text/css'}
+    %title= @title
+  %body
+    = yield

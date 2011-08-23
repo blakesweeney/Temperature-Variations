@@ -31,3 +31,9 @@ Rake::TestTask.new do |t|
 end
 
 task :default => :test
+
+desc "Copy image files to server"
+task :images do
+  system("scp public/images/families/* rna.bgsu.edu:/Servers/variation_data/shared/families/")
+  system("scp public/images/positions/* rna.bgsu.edu:/Servers/variation_data/shared/positions/")
+end

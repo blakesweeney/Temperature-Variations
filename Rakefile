@@ -9,7 +9,7 @@ remote_task :make_links do
   current = "/Servers/variation_data/current"
   shared = "/Servers/variation_data/shared"
   cmds = [
-    'rm -rf settings 2>/dev/null', 
+    "mkdir #{current}/public/images 2>/dev/null",
     "ln -s #{shared}/families #{current}/public/images/families",
     "ln -s #{shared}/positions #{current}/public/images/positions"
   ]

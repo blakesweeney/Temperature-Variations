@@ -19,8 +19,8 @@
             %td= point['positions'][1]
             %td= point['sequence']
             %td 
-              %a{:href => "/family/" + point['family']}= point['family']
-            %td{:class => point['family'] + point['positions'].join('-')}
+              %a{:class => 'load_family_image', :href => '#'}= point['family']
+            %td
               %a{:class => 'load_analysis_image', :href => '#'} Load
 
   .grid_4

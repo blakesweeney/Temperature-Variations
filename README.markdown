@@ -1,8 +1,7 @@
-TODO: Project name
-=========================
+Temperature Variations
+======================
 
-About
-=====
+Simple site to view temperature variation data.
 
 Author
 ======

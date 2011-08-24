@@ -39,7 +39,7 @@ $(document).ready(function() {
     var sibs = $(this).parent().siblings();
     var to_text = function(n) { return n.firstChild.data };
     var pos = to_text(sibs[0]) + "-" + to_text(sibs[1]);
-    var family = sibs[3].children[0].text;
+    var family = to_text(sibs[3]);
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
 
     // Set color

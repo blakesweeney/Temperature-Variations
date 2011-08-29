@@ -3,7 +3,7 @@ Bundler.require
 
 $db = Mongo::Connection.new.db('biology')
 $families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS tSS cSS}.freeze
-$base_url = (`hostname` =~ /rna/ ? 'http://rna.bgsu.edu/variation_data' : '')
+$base_url = (`hostname` =~ /lab/ ? 'http://rna.bgsu.edu/variation_data' : '')
 
 get '/' do
   @title = 'All Variations'

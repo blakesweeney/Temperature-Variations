@@ -7,7 +7,7 @@
     %script{:src => $base_url + 'javascript/site.js'}
     %link{:rel => "stylesheet/less", :href => $base_url + 'stylesheets/main.less',
       :type => 'text/css'}
-    %script{:src => '/javascript/less.js'}
+    %script{:src => $base_url + 'javascript/less.js'}
     %link{:rel => "stylesheet", :media => 'all', 
       :href => $base_url + 'stylesheets/960.css', :type => 'text/css' }
     %title= @title

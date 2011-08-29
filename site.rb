@@ -3,7 +3,7 @@ Bundler.require
 
 $db = Mongo::Connection.new.db('biology')
 $families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS tSS cSS}.freeze
-$base_url = (`hostname` =~ /lab/ ? 'http://rna.bgsu.edu/variation_data' : '')
+$base_url = (`hostname` =~ /lab/ ? 'http://rna.bgsu.edu/variation_data' : '/')
 
 get '/' do
   @title = 'All Variations'
@@ -26,9 +26,10 @@ get '/family/:family' do
   end
 
   @family = params[:family]
+  replace = ( $base_url =~ /http/ ? '/variation_data/' : '')
   @data = Dir["public/images/positions/#{@family}*"].map do |e|
       pos = e.match(/(\d+-\d+)/)[0]
-      { :src => e.sub('public', $base_url), :positions => pos }
+      { :src => e.sub('public', replace), :positions => pos }
   end
   haml :"family/show"
 end

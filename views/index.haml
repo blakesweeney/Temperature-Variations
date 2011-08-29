@@ -23,7 +23,8 @@
             %td= point['positions'][0]
             %td= point['positions'][1]
             %td= point['sequence']
-            %td=  point['family']
+            %td  
+              %a{:href => $base_url + "family/#{point['family']}"}= point['family']
             %td
               %a{:class => 'load_analysis_image', :href => '#'} Load
 

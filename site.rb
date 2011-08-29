@@ -12,6 +12,13 @@ get '/' do
     :family.in => $families,
     :conserved => true,
     :pdb => '2AW7')
+  @data.select! do |d|
+    if d['family'][1] == d['family'][2]
+      d['positions'].first.to_i < d['positions'].last.to_i
+    else
+      true
+    end
+  end
   haml :index
 end
 
@@ -29,7 +36,14 @@ get '/family/:family' do
   replace = ( $base_url =~ /http/ ? '/variation_data/' : '')
   @data = Dir["public/images/positions/#{@family}*"].map do |e|
       pos = e.match(/(\d+-\d+)/)[0]
-      { :src => e.sub('public', replace), :positions => pos }
+      { :src => e.sub('public', replace), :positions => pos.split('-') }
   end
+
+  if @family[1].downcase == @family[2].downcase
+    @data.select! do |d|
+      d[:positions].first.to_i < d[:positions].last.to_i
+    end
+  end
+  @data.sort! { |a, b| a[:positions].first.to_i <=> b[:positions].first.to_i }
   haml :"family/show"
 end

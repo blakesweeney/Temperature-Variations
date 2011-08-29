@@ -4,6 +4,6 @@
   - @data.each do |data|
     .grid_4
       .position
-        = data[:positions]
+        = data[:positions].join('-')
         %br
         %img{:src => data[:src]}

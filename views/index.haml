@@ -4,6 +4,11 @@
       %h1 Temperature Variation and Base Pairs
 
   .grid_8
+    %form
+      %label Search for:
+      %input{:type => "text", :id => "position-search"}
+
+  .grid_8
     %table{:id => 'position-table', :class => "tablesorter"}
       %thead
         %tr 

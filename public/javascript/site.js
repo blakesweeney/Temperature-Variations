@@ -35,6 +35,8 @@ $(document).ready(function() {
     }
   });
 
+  $("#position-search").quicksearch("#position-table tbody tr");
+
   $(".load_analysis_image").click(function(){
     var sibs = $(this).parent().siblings();
     var to_text = function(n) { return n.firstChild.data };

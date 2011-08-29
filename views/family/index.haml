@@ -2,9 +2,7 @@
   %thead
     %tr
       %th Family
-      %th Count
   %tbody
     - @families.each do |family|
       %tr
-        %td= family['name']
-        %td= family['count']
+        %td= family

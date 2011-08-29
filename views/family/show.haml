@@ -1,1 +1,9 @@
-%h1 No content
+%h1= @family
+
+.images
+  - @data.each do |data|
+    .grid_4
+      .position
+        = data[:positions]
+        %br
+        %img{:src => data[:src]}

@@ -15,10 +15,19 @@ get '/' do
 end
 
 get '/family/?' do
-  @families = $db['interactions'].group(
-    :initial => '{}',
-    :reduce => 'function(obj, agg) {
-      agg
-    }')
+  @families = $families
   haml :"family/index"
+end
+
+get '/family/:family' do
+  if !$families.include?(params[:family])
+    halt 404
+  end
+
+  @family = params[:family]
+  @data = Dir["public/images/positions/*#{@family}*"].map do |e|
+      pos = e.match(/(\d+-\d+)/)[0]
+      { :src => e.sub('public', ''), :positions => pos }
+  end
+  haml :"family/show"
 end

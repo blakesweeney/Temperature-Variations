@@ -25,11 +25,6 @@ get '/' do
   haml :index
 end
 
-get '/family/?' do
-  @families = $families
-  haml :"family/index"
-end
-
 get '/family/:family' do
   if !$families.any? { |f| f.match(params[:family]) }
     halt 404

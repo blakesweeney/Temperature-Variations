@@ -19,10 +19,10 @@
           %th T. thermus Position 2
           %th T. thermus Sequence
           %th Base Pair Family
-          %th Analysis
+          -# %th Analysis
       %tbody
         - @data.each_with_index do |point, index|
-          %tr
+          %tr{:id => index.to_s, :class => 'load_analysis_image'}
             %td{:id => index.to_s + '-epos1'}= point['positions'][0]
             %td{:id => index.to_s + '-epos2'}= point['positions'][1]
             %td{:id => index.to_s + '-eseq'}= point['sequence']
@@ -31,8 +31,8 @@
             %td{:id => index.to_s + '-tseq'}
             %td{:id => index.to_s + '-family'}
               %a{:href => $base_url + "family/#{point['family']}"}= point['family']
-            %td{:id => index.to_s + '-analysis'}
-              %a{:class => 'load_analysis_image', :href => '#'} Load
+            -# %td{:id => index.to_s + '-analysis'}
+            -#   %a{:class => 'load_analysis_image', :href => '#'} Load
 
   .grid_4
     .analysis

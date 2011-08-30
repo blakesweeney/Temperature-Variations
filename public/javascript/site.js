@@ -39,7 +39,6 @@ $(document).ready(function() {
 
   $(".load_analysis_image").click(function(){
     var row_id = $(this).attr('id');
-    // var row_id = $(this).parent().attr('id');
     var ind_id = row_id.replace(/\-\w+/, '');
     var pos1 = $("#" + ind_id + "-epos1");
     var pos2 = $("#" + ind_id + "-epos2");
@@ -47,6 +46,7 @@ $(document).ready(function() {
     var family = $("#" + ind_id + "-family").text().trim();
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
 
+    $(this).removeClass("selected_color");
     $(this).siblings().removeClass("selected_color");
     $(this).toggleClass("selected_color");
 

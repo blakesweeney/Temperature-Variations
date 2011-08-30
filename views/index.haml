@@ -12,21 +12,27 @@
     %table{:id => 'position-table', :class => "tablesorter"}
       %thead
         %tr 
-          %th Position 1
-          %th Position 2
-          %th Sequence
+          %th E. coli Position 1
+          %th E. coli Position 2
+          %th E. coli Sequence
+          %th T. thermus Position 1
+          %th T. thermus Position 2
+          %th T. thermus Sequence
           %th Base Pair Family
-          %th Analysis
+          -# %th Analysis
       %tbody
-        - @data.each do |point|
-          %tr
-            %td= point['positions'][0]
-            %td= point['positions'][1]
-            %td= point['sequence']
-            %td  
+        - @data.each_with_index do |point, index|
+          %tr{:id => index.to_s, :class => 'load_analysis_image'}
+            %td{:id => index.to_s + '-epos1'}= point['positions'][0]
+            %td{:id => index.to_s + '-epos2'}= point['positions'][1]
+            %td{:id => index.to_s + '-eseq'}= point['sequence']
+            %td{:id => index.to_s + '-tpos1'}= point['aligned_to']['positions'][0]
+            %td{:id => index.to_s + '-tpos2'}= point['aligned_to']['positions'][1]
+            %td{:id => index.to_s + '-tseq'}= point['aligned_to']['sequence']
+            %td{:id => index.to_s + '-family'}
               %a{:href => $base_url + "family/#{point['family']}"}= point['family']
-            %td
-              %a{:class => 'load_analysis_image', :href => '#'} Load
+            -# %td{:id => index.to_s + '-analysis'}
+            -#   %a{:class => 'load_analysis_image', :href => '#'} Load
 
   .grid_4
     .analysis

@@ -38,13 +38,14 @@ $(document).ready(function() {
   $("#position-search").quicksearch("#position-table tbody tr");
 
   $(".load_analysis_image").click(function(){
-    var sibs = $(this).parent().siblings();
-    var to_text = function(n) { return n.firstChild.data };
-    var pos = to_text(sibs[0]) + "-" + to_text(sibs[1]);
-    var family = to_text(sibs[3].children[0]);
+    var row_id = $(this).parent().attr('id');
+    var ind_id = row_id.replace(/\-\w+/, '');
+    var pos1 = $("#" + ind_id + "-epos1");
+    var pos2 = $("#" + ind_id + "-epos2");
+    var pos = pos1.text() + '-' + pos2.text();
+    var family = $("#" + ind_id + "-family").text().trim();
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
 
-    // Set color
     $(this).closest("tr").siblings().removeClass("selected_color");
     $(this).parents("tr").toggleClass("selected_color");
 

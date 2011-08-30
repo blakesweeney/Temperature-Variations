@@ -2,7 +2,10 @@ require "bundler"
 Bundler.require
 
 $db = Mongo::Connection.new.db('biology')
-$families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS tSS cSS}.freeze
+$families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS}
+$families << /css/i
+$families << /tss/i
+$families.freeze
 $base_url = (`hostname` =~ /lab/ ? 'http://rna.bgsu.edu/variation_data/' : '/')
 
 get '/' do
@@ -28,11 +31,13 @@ get '/family/?' do
 end
 
 get '/family/:family' do
-  if !$families.include?(params[:family])
+  if !$families.any? { |f| f.match(params[:family]) }
     halt 404
   end
 
-  @family = params[:family]
+  @family = params[:family].upcase
+  @family[0] = @family[0].downcase
+  p @family
   replace = ( $base_url =~ /http/ ? '/variation_data/' : '')
   @data = Dir["public/images/positions/#{@family}*"].map do |e|
       pos = e.match(/(\d+-\d+)/)[0]

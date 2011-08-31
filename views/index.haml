@@ -34,10 +34,6 @@
             %td{:id => index.to_s + '-family'}
               %a{:href => $base_url + "family/#{point['aligned_to']['family']}"}= point['aligned_to']['family']
             %td{:id => index.to_s + '-tseq'}= point['aligned_to']['sequence']
-            -# %td{:id => index.to_s + '-family'}
-            -#   %a{:href => $base_url + "family/#{point['family']}"}= point['family']
-            -# %td{:id => index.to_s + '-analysis'}
-            -#   %a{:class => 'load_analysis_image', :href => '#'} Load
 
   .grid_4
     .analysis

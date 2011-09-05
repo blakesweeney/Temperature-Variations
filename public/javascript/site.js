@@ -28,6 +28,8 @@ $.tablesorter.addParser({
 
 $(document).ready(function() {
 
+  var selected_row = null;
+
   $("#position-table").tablesorter({ 
     sortList: [[0, 0]],
     headers: { 
@@ -38,6 +40,7 @@ $(document).ready(function() {
   $("#position-search").quicksearch("#position-table tbody tr");
 
   $(".load_analysis_image").click(function(){
+    selected_row = $(this);
     var row_id = $(this).attr('id');
     var ind_id = row_id.replace(/\-\w+/, '');
     var pos1 = $("#" + ind_id + "-epos1");
@@ -61,7 +64,28 @@ $(document).ready(function() {
     $("#analysis_image").attr('src', img_src);
     $("#analysis_data").text(family);
   });
+
+  key('down', function() {
+    if(selected_row == null) {
+      selected_row = $('#position-table tbody tr:first');
+      selected_row.trigger('click');
+    } else {
+      selected_row.next().trigger('click');
+    }
+    return false;
+  });
+
+  key('up', function() {
+    if (selected_row == null) {
+      selected_row = $("#position-table tbody tr:last");
+      selected_row.trigger('click');
+    } else {
+      selected_row.prev().trigger('click');
+    }
+    return false;
+  });
 });
+
 
 function is_production() {
   return window.location.hostname.match("rna");

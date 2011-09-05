@@ -7,11 +7,9 @@
     %script{:src => $base_url + 'javascript/jquery.quicksearch.js'}
     %script{:src => $base_url + 'javascript/site.js'}
     %script{:src => $base_url + 'javascript/dragtable.js'}
-    %link{:rel => "stylesheet/less", :href => $base_url + 'stylesheets/main.less',
-      :type => 'text/css'}
+    %link{rel: "stylesheet/less", type: "text/css", href: $base_url + 'stylesheets/bootstrap.less' }
+    %link{rel: "stylesheet/less", type: "text/css", href: $base_url + 'stylesheets/main.less' }
     %script{:src => $base_url + 'javascript/less.js'}
-    %link{:rel => "stylesheet", :media => 'all', 
-      :href => $base_url + 'stylesheets/960.css', :type => 'text/css' }
     %title= @title
   %body
     = yield

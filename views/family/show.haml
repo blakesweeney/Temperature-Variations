@@ -1,9 +1,12 @@
-%h1= @family
-
-.images
-  - @data.each do |data|
-    .grid_4
-      .position
-        = data[:positions].join('-')
-        %br
-        %img{:src => data[:src]}
+.container
+  .row
+    %div{class: "span16 columns"}
+      %center
+        %h1= @family
+    .images
+      - @data.each do |data|
+        %div{:class => "span4 columns"}
+          .position
+            %center
+              %h3= data[:positions].join(' ')
+            %img{:src => data[:src]}

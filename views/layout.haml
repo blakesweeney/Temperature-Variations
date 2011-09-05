@@ -12,4 +12,13 @@
     %script{:src => $base_url + 'javascript/less.js'}
     %title= @title
   %body
+    .topbar
+      .topbar-inner
+        .container
+          %h3 
+            %a{href: $base_url} Variations
+          %ul{class: "nav"}
+            - $nav_families.each do |family|
+              %li
+                %a{href: '/family/' + family}= family
     = yield

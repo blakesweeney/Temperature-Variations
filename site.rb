@@ -2,8 +2,9 @@ require "bundler"
 Bundler.require
 
 $db = Mongo::Connection.new.db('biology')
-$families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS} << /css/i << /tss/i
+$families = %w{cWW tWW cWH tWH cWS tWS cHH tHH cHS tHS} << /cSS/i << /tSS/i
 $base_url = (`hostname` =~ /lab/ ? 'http://rna.bgsu.edu/variation_data/' : '/')
+$nav_families = $families.map { |f| (f.is_a?(String) ? f : f.source) }
 
 def first_apperance?(interaction, key = 'positions')
   interaction[key][0].to_i < interaction[key][1].to_i

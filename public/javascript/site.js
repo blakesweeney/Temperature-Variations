@@ -46,12 +46,13 @@ $(document).ready(function() {
     var family = $("#" + ind_id + "-family").text().trim();
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
 
-    $(this).removeClass("selected_color");
-    $(this).siblings().removeClass("selected_color");
-    $(this).toggleClass("selected_color");
+    var selected_class = "red"
+    $(this).removeClass(selected_class);
+    $(this).siblings().removeClass(selected_class);
+    $(this).toggleClass(selected_class);
 
     $("#analysis_image").attr('src', img_src);
-    $("#analysis_data").text(pos);
+    $("#analysis_data").text(pos1.text() + ' ' + pos2.text());
   });
 
   $(".load_family_image").click(function(){

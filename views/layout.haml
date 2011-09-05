@@ -5,10 +5,13 @@
     %script{:src => $base_url + 'javascript/jquery.js'}
     %script{:src => $base_url + 'javascript/jquery.tablesorter.js'}
     %script{:src => $base_url + 'javascript/jquery.quicksearch.js'}
-    %script{:src => $base_url + 'javascript/site.js'}
     %script{:src => $base_url + 'javascript/dragtable.js'}
-    %link{rel: "stylesheet/less", type: "text/css", href: $base_url + 'stylesheets/bootstrap.less' }
-    %link{rel: "stylesheet/less", type: "text/css", href: $base_url + 'stylesheets/main.less' }
+    %script{:src => $base_url + 'javascript/keymaster.min.js'}
+    %script{:src => $base_url + 'javascript/site.js'}
+    %link{rel: "stylesheet/less", type: "text/css",
+      href: $base_url + 'stylesheets/bootstrap.less'}
+    %link{rel: "stylesheet/less", type: "text/css",
+      href: $base_url + 'stylesheets/main.less'}
     %script{:src => $base_url + 'javascript/less.js'}
     %title= @title
 

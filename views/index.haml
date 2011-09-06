@@ -1,8 +1,7 @@
 .container
   .row
     %div{class: "span16 columns"}
-      %center
-        %h1 Temperature Variation and Base Pairs
+      %h1 Temperature Variation and Base Pairs
 
     %div{class: "span8 columns"}
       %form
@@ -23,23 +22,30 @@
             %th T. thermus Position 2
             %th T. thermus Family
             %th T. thermus Sequence
-            -# %th Analysis
         %tbody
           - @data.each_with_index do |point, index|
-            %tr{:id => index.to_s, :class => 'load_analysis_image'}
+            %tr{:id => index.to_s, :class => 'load_analysis_image',
+              :"data-nt" => '2AW7_1_A_' + point['positions'][0]}
               %td{:id => index.to_s + '-epos1'}= point['positions'][0]
               %td{:id => index.to_s + '-epos2'}= point['positions'][1]
-              %td{:id => index.to_s + '-family'}
+              %td{:id => index.to_s + '-efamily'}
                 %a{:href => $base_url + "family/#{point['family']}"}= point['family']
               %td{:id => index.to_s + '-eseq'}= point['sequence']
               %td{:id => index.to_s + '-tpos1'}= point['aligned_to']['positions'][0]
               %td{:id => index.to_s + '-tpos2'}= point['aligned_to']['positions'][1]
-              %td{:id => index.to_s + '-family'}
-                %a{:href => $base_url + "family/#{point['aligned_to']['family']}"}= point['aligned_to']['family']
+              %td{:id => index.to_s + '-tfamily'}
+                %a{:href => $base_url + "family/#{point['aligned_to']['family']}"}
+                  = point['aligned_to']['family']
               %td{:id => index.to_s + '-tseq'}= point['aligned_to']['sequence']
 
     %div{class: "span5 columns"}
       .analysis
-        %center
-          %h4{:id => "analysis_data"}
-          %img{:id => "analysis_image"}
+        .image
+          %h4{id: "analysis_data"}
+          %img{id: "analysis_image"}
+        .viewer
+          %div{id: 'jmoldiv', class: 'jmol'}
+            %script{type: 'text/javascript'}
+              jmolInitialize(" ./jmol");
+              jmolSetAppletColor("#ffffff");
+              jmolApplet(350);

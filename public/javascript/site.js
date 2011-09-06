@@ -47,7 +47,7 @@ $(document).ready(function() {
     var pos1 = $("#" + ind_id + "-epos1");
     var pos2 = $("#" + ind_id + "-epos2");
     var pos = pos1.text() + '-' + pos2.text();
-    var family = $("#" + ind_id + "-family").text().trim();
+    var family = $("#" + ind_id + "-efamily").text().trim();
     var img_src = base_image() + 'positions/' + family + '_' + pos + '.png';
 
     var selected_class = "red"
@@ -84,6 +84,12 @@ $(document).ready(function() {
       selected_row.prev().trigger('click');
     }
     return false;
+  });
+
+  // jmol
+  jmolInlineLoader.initialize({
+    chbxClass: 'load_analysis_image',
+    serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php'
   });
 });
 

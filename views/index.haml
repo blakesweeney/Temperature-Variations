@@ -25,7 +25,7 @@
         %tbody
           - @data.each_with_index do |point, index|
             %tr{:id => index.to_s, :class => 'load_analysis_image',
-              :"data-nt" => '2AW7_1_A_' + point['positions'][0]}
+              :"data-nt" => '2AW7_1_A_' + point['positions'][0] + ',' + '2AW7_1_A_' + point['positions'][1]}
               %td{:id => index.to_s + '-epos1'}= point['positions'][0]
               %td{:id => index.to_s + '-epos2'}= point['positions'][1]
               %td{:id => index.to_s + '-efamily'}

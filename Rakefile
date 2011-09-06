@@ -25,6 +25,9 @@ task "vlad:deploy" => %w{
   vlad:cleanup
 }
 
+desc "Deploy"
+task :deploy => 'vlad:deploy'
+
 Rake::TestTask.new do |t|
   t.libs << 'spec'
   t.pattern = "spec/*/*_spec.rb"

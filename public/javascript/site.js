@@ -33,7 +33,8 @@ $(document).ready(function() {
   $("#position-table").tablesorter({ 
     sortList: [[0, 0]],
     headers: { 
-      3: { sorter: 'bpfamily' }
+      2: { sorter: 'bpfamily' },
+      6: { sorter: 'bpfamily' }
     }
   });
 

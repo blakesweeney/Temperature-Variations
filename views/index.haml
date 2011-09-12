@@ -42,11 +42,19 @@
     %div{class: "span5 columns"}
       .analysis
         .image
-          %h4{id: "analysis_data"}
-          %img{id: "analysis_image"}
+          %div{class: "span5 columns"}
+            %h4{id: "analysis_data"}
+            %img{id: "analysis_image"}
         .viewer
-          %div{id: 'jmoldiv', class: 'jmol'}
-            %script{type: 'text/javascript'}
-              jmolInitialize(" ./jmol");
-              jmolSetAppletColor("#ffffff");
-              jmolApplet(350);
+          %div{class: 'span5 columns'}
+            %div{class: 'span5 columns'}
+              %div{id: 'jmoldiv', class: 'jmol'}
+                %script{type: 'text/javascript'}
+                  jmolInitialize(" ./jmol");
+                  jmolSetAppletColor("#ffffff");
+                  jmolApplet(350);
+              %div{class: 'span5 columns'}
+                %div{id: 'jmol-controls'}
+                  %input{type: 'checkbox', id: 'neighborhood', name: 'neighborhood'} Neighborhood
+                  %input{type: 'checkbox', id: 'show-ec', name: 'show-ec'} E. coli
+                  %input{type: 'checkbox', id: 'show-tt', name: 'show-tt'} T. thermus

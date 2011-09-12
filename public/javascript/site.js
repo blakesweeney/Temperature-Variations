@@ -66,24 +66,22 @@ $(document).ready(function() {
     $("#analysis_data").text(family);
   });
 
-  key('down', function() {
-    if(selected_row == null) {
-      selected_row = $('#position-table tbody tr:first');
-      selected_row.trigger('click');
+  function key_action(row, def, method) {
+    if (row == null) {
+      row = def;
+      row.trigger('click');
     } else {
-      selected_row.next().trigger('click');
+      row[method]().trigger('click');
     }
     return false;
+  }
+
+  key('down', function() {
+    return key_action(selected_row, $('#position-table tbody tr:first'), 'next');
   });
 
   key('up', function() {
-    if (selected_row == null) {
-      selected_row = $("#position-table tbody tr:last");
-      selected_row.trigger('click');
-    } else {
-      selected_row.prev().trigger('click');
-    }
-    return false;
+    return key_action(selected_row, $('#position-table tbody tr:last'), 'prev');
   });
 
   // jmol

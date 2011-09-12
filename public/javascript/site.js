@@ -88,7 +88,8 @@ $(document).ready(function() {
   // jmol
   jmolInlineLoader.initialize({
     chbxClass: 'load_analysis_image',
-    serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php'
+    serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
+    toggle_neighborhood: 'neighborhood'
   });
 
   // Work around to clean out initial display

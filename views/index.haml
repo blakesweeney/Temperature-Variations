@@ -1,60 +1,59 @@
 .container
+
   .row
+    %br
     %div{class: "span16 columns"}
-      %h1 Temperature Variation and Base Pairs
+      .scroll
+        %table{:id => 'position-table', :class => "tablesorter draggable zebra-striped"}
+          %thead
+            %tr
+              %th E. coli Position 1
+              %th E. coli Position 2
+              %th E. coli Family
+              %th E. coli Sequence
+              %th T. thermus Position 1
+              %th T. thermus Position 2
+              %th T. thermus Family
+              %th T. thermus Sequence
+          %tbody
+            - @data.each_with_index do |point, index|
+              - ec_nts = point['positions'].map { |p| '2AW7_1_A_' + p }.join(',')
+              - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A' + p }.join(',')
+              %tr{id: index.to_s, class: 'load_analysis_image', :"data-nt" => ec_nts }
+                %td{:id => index.to_s + '-epos1'}= point['positions'][0]
+                %td{:id => index.to_s + '-epos2'}= point['positions'][1]
+                %td{:id => index.to_s + '-efamily'}
+                  %a{:href => $base_url + "family/#{point['family']}"}= point['family']
+                %td{:id => index.to_s + '-eseq'}= point['sequence']
+                %td{:id => index.to_s + '-tpos1'}= point['aligned_to']['positions'][0]
+                %td{:id => index.to_s + '-tpos2'}= point['aligned_to']['positions'][1]
+                %td{:id => index.to_s + '-tfamily'}
+                  %a{:href => $base_url + "family/#{point['aligned_to']['family']}"}
+                    = point['aligned_to']['family']
+                %td{:id => index.to_s + '-tseq'}= point['aligned_to']['sequence']
 
-    %div{class: "span8 columns"}
-      %form
-        %label{:for => 'position-search'} Search for:
-        .input
-          %input{:type => "text", :class => 'xlarge', :size => 30, 
-            :name => "position-search", :id => "position-search"}
-
-    %div{class: "span11 columns"}
-      %table{:id => 'position-table', :class => "tablesorter draggable zebra-striped"}
-        %thead
-          %tr 
-            %th E. coli Position 1
-            %th E. coli Position 2
-            %th E. coli Family
-            %th E. coli Sequence
-            %th T. thermus Position 1
-            %th T. thermus Position 2
-            %th T. thermus Family
-            %th T. thermus Sequence
-        %tbody
-          - @data.each_with_index do |point, index|
-            - ec_nts = point['positions'].map { |p| '2AW7_1_A_' + p }.join(',')
-            - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A' + p }.join(',')
-            %tr{id: index.to_s, class: 'load_analysis_image', :"data-nt" => ec_nts }
-              %td{:id => index.to_s + '-epos1'}= point['positions'][0]
-              %td{:id => index.to_s + '-epos2'}= point['positions'][1]
-              %td{:id => index.to_s + '-efamily'}
-                %a{:href => $base_url + "family/#{point['family']}"}= point['family']
-              %td{:id => index.to_s + '-eseq'}= point['sequence']
-              %td{:id => index.to_s + '-tpos1'}= point['aligned_to']['positions'][0]
-              %td{:id => index.to_s + '-tpos2'}= point['aligned_to']['positions'][1]
-              %td{:id => index.to_s + '-tfamily'}
-                %a{:href => $base_url + "family/#{point['aligned_to']['family']}"}
-                  = point['aligned_to']['family']
-              %td{:id => index.to_s + '-tseq'}= point['aligned_to']['sequence']
-
-    %div{class: "span5 columns"}
-      .analysis
+    .row
+      %br
+      %div{class: "span16 columns"}
         .image
           %div{class: "span5 columns"}
-            %h4{id: "analysis_data"}
             %img{id: "analysis_image"}
         .viewer
           %div{class: 'span5 columns'}
-            %div{class: 'span5 columns'}
-              %div{id: 'jmoldiv', class: 'jmol'}
-                %script{type: 'text/javascript'}
-                  jmolInitialize(" ./jmol");
-                  jmolSetAppletColor("#ffffff");
-                  jmolApplet(350);
-              %div{class: 'span5 columns'}
-                %div{id: 'jmol-controls'}
+            %div{id: 'jmoldiv', class: 'jmol'}
+              %script{type: 'text/javascript'}
+                jmolInitialize(" ./jmol");
+                jmolSetAppletColor("#ffffff");
+                jmolApplet(350);
+
+        .controls
+          %div{class: "span3 columns"}
+            %form
+              .clearfix
+                %label{:for => 'position-search'} Select
+                .input
+                  %input{:type => "text", :class => 'xlarge', :size => 30, 
+                    :name => "position-search", :id => "position-search"}
+              .clearfix
+                .input
                   %button{type: 'button', class: 'btn small'} Neighborhood
-                  -# %input{type: 'checkbox', id: 'show-ec', name: 'show-ec'} E. coli
-                  -# %input{type: 'checkbox', id: 'show-tt', name: 'show-tt'} T. thermus

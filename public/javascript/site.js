@@ -71,6 +71,7 @@ $(document).ready(function() {
       row = def;
       row.trigger('click');
     } else {
+      jmolInlineLoader.checkbox_click(row.attr('id'));
       row[method]().trigger('click');
     }
     return false;
@@ -90,7 +91,6 @@ $(document).ready(function() {
     serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php'
   });
 });
-
 
 function base_image() {
   return (window.location.hostname.match("rna") ? "/variation_data/images/" : "/images/");

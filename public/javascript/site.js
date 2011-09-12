@@ -90,6 +90,9 @@ $(document).ready(function() {
     chbxClass: 'load_analysis_image',
     serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php'
   });
+
+  // Work around to clean out initial display
+  jmolInlineLoader.checkbox_click($('.load_analysis_image').attr('id'));
 });
 
 function base_image() {

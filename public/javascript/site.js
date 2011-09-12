@@ -92,10 +92,6 @@ $(document).ready(function() {
 });
 
 
-function is_production() {
-  return window.location.hostname.match("rna");
-}
-
 function base_image() {
-  return (is_production() ? "/variation_data/images/" : "/images/");
+  return (window.location.hostname.match("rna") ? "/variation_data/images/" : "/images/");
 }

@@ -41,9 +41,10 @@ $(document).ready(function() {
   $("#position-search").quicksearch("#position-table tbody tr");
 
   function show_nt(id, nts) {
-    var box = $(id)
+    var box = $(id);
     box.attr("data-nts", nts);
-    if (box.is(':checked')) {
+    if (box.is(':checked')) { // Do this twice so we toggle back to the orginal state
+      jmolInlineLoader.checkbox_click(box.attr('id'));
       jmolInlineLoader.checkbox_click(box.attr('id'));
     }
   }
@@ -98,13 +99,13 @@ $(document).ready(function() {
 
   // jmol
   jmolInlineLoader.initialize({
-    chbxClass: 'nt',
+    chbxClass: 'display-nt',
     serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
     neighborhoodButtonId: 'neighborhood'
   });
 
   // Work around to clean out initial display
-  jmolInlineLoader.checkbox_click($('.load_analysis_image').attr('id'));
+  // jmolInlineLoader.checkbox_click($('.load_analysis_image').attr('id'));
 });
 
 function base_image() {

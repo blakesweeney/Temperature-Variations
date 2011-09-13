@@ -42,7 +42,7 @@ $(document).ready(function() {
 
   function show_nt(id, nts) {
     var box = $(id);
-    box.attr("data-nts", nts);
+    box.attr("data-nt", nts);
     if (box.is(':checked')) { // Do this twice so we toggle back to the orginal state
       jmolInlineLoader.checkbox_click(box.attr('id'));
       jmolInlineLoader.checkbox_click(box.attr('id'));

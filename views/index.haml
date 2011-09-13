@@ -19,7 +19,7 @@
             - @data.each_with_index do |point, index|
               - ec_nts = point['positions'].map { |p| '2AW7_1_A_' + p }.join(',')
               - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A' + p }.join(',')
-              %tr{id: index.to_s, class: 'load_analysis_image', :"data-nt" => ec_nts }
+              %tr{id: index.to_s, class: 'load_analysis_image', ec: ec_nts, tt: tt_nts }
                 %td{:id => index.to_s + '-epos1'}= point['positions'][0]
                 %td{:id => index.to_s + '-epos2'}= point['positions'][1]
                 %td{:id => index.to_s + '-efamily'}
@@ -46,14 +46,33 @@
                 jmolSetAppletColor("#ffffff");
                 jmolApplet(350);
 
-        .controls
-          %div{class: "span3 columns"}
+        %div{class: "span3 columns"}
+          .controls
             %form
-              .clearfix
-                %label{:for => 'position-search'} Select
-                .input
-                  %input{type: "text", class: 'xlarge', size: 30, 
-                    name: "position-search", id: "position-search"}
-              .clearfix
-                .input
-                  %button{type: 'button', id: 'neighborhood', class: 'btn small'} Neighborhood
+              %fieldset
+                %legend Table Controls
+                .clearfix
+                  %label{:for => 'position-search'} Select
+                  .input
+                    %input{type: "text", class: 'mini', name: "position-search",
+                      id: "position-search"}
+
+            %form
+              %fieldset
+                %legend JMol Controls
+                .clearfix
+                  %label{id: 'structure-list'} Structures
+                  .input
+                    %ul{class: 'inputs-list'}
+                      %li 
+                        %label
+                          %input{type: 'checkbox', class: 'nt', id: 'ec-box', name: 'ec', value: 'ec'}
+                          %span E. coli
+                      %li
+                        %label
+                          %input{type: 'checkbox', class: 'nt', id: 'tt-box', name: 'tt', value: 'tt'}
+                          %span T. thermus
+                .clearfix
+                  .input
+                    %input{type: 'submit', id: 'neighborhood', name: 'neighborhood', 
+                      class: 'btn', value: 'Show Neighborhood'}

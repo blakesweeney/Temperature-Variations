@@ -24,7 +24,12 @@
           %h3 
             %a{href: $base_url} Variations
           %ul{class: "nav"}
-            - $nav_families.each do |family|
-              %li
-                %a{href: '/family/' + family}= family
+            %li
+              %a{href: '#'} Phylogeny
+            %li{class: 'dropdown'}
+              %a{href: '#', class: 'dropdown-toggle'} Family
+              %ul{class: 'dropdown-menu'}
+                - $nav_families.each do |family|
+                  %li
+                    %a{href: '/family/' + family}= family
     = yield

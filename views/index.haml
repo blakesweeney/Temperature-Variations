@@ -46,14 +46,33 @@
                 jmolSetAppletColor("#ffffff");
                 jmolApplet(350);
 
-        .controls
-          %div{class: "span3 columns"}
+        %div{class: "span3 columns"}
+          .controls
             %form
-              .clearfix
-                %label{:for => 'position-search'} Select
-                .input
-                  %input{type: "text", class: 'xlarge', size: 30, 
-                    name: "position-search", id: "position-search"}
-              .clearfix
-                .input
-                  %button{type: 'button', id: 'neighborhood', class: 'btn small'} Neighborhood
+              %fieldset
+                %legend Table Controls
+                .clearfix
+                  %label{:for => 'position-search'} Select
+                  .input
+                    %input{type: "text", class: 'mini', name: "position-search",
+                      id: "position-search"}
+
+            %form
+              %fieldset
+                %legend JMol Controls
+                .clearfix
+                  %label{id: 'structure-list'} Structures
+                  .input
+                    %ul{class: 'inputs-list'}
+                      %li 
+                        %label{class: 'disabled'}
+                          %input{type: 'checkbox', name: 'ec', value: 'ec', disabled: true}
+                          %span E. coli
+                      %li
+                        %label{class: 'disabled'}
+                          %input{type: 'checkbox', name: 'tt', value: 'tt', disabled: true}
+                          %span T. thermus
+                .clearfix
+                  .input
+                    %input{type: 'submit', id: 'neighborhood', name: 'neighborhood', 
+                      class: 'btn', value: 'Show Neighborhood'}

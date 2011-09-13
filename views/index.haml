@@ -19,7 +19,7 @@
             - @data.each_with_index do |point, index|
               - ec_nts = point['positions'].map { |p| '2AW7_1_A_' + p }.join(',')
               - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A' + p }.join(',')
-              %tr{id: index.to_s, class: 'load_analysis_image', :"data-nt" => ec_nts }
+              %tr{id: index.to_s, class: 'load_analysis_image', ec: ec_nts, tt: tt_nts }
                 %td{:id => index.to_s + '-epos1'}= point['positions'][0]
                 %td{:id => index.to_s + '-epos2'}= point['positions'][1]
                 %td{:id => index.to_s + '-efamily'}
@@ -65,12 +65,12 @@
                   .input
                     %ul{class: 'inputs-list'}
                       %li 
-                        %label{class: 'disabled'}
-                          %input{type: 'checkbox', name: 'ec', value: 'ec', disabled: true}
+                        %label
+                          %input{type: 'checkbox', class: 'nt', id: 'ec-box', name: 'ec', value: 'ec'}
                           %span E. coli
                       %li
-                        %label{class: 'disabled'}
-                          %input{type: 'checkbox', name: 'tt', value: 'tt', disabled: true}
+                        %label
+                          %input{type: 'checkbox', class: 'nt', id: 'tt-box', name: 'tt', value: 'tt'}
                           %span T. thermus
                 .clearfix
                   .input

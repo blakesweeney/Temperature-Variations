@@ -40,6 +40,14 @@ $(document).ready(function() {
 
   $("#position-search").quicksearch("#position-table tbody tr");
 
+  function show_nt(id, nts) {
+    var box = $(id)
+    box.attr("data-nts", nts);
+    if (box.is(':checked')) {
+      jmolInlineLoader.checkbox_click(box.attr('id'));
+    }
+  }
+
   $(".load_analysis_image").click(function(){
     selected_row = $(this);
     var row_id = $(this).attr('id');
@@ -57,6 +65,10 @@ $(document).ready(function() {
 
     $("#analysis_image").attr('src', img_src);
     $("#analysis_data").text(pos1.text() + ' ' + pos2.text());
+
+    // Update data-nts for checkboxes
+    show_nt("#ec-box", $(this).attr("ec"));
+    show_nt("#tt-box", $(this).attr("tt"));
   });
 
   $(".load_family_image").click(function(){
@@ -66,10 +78,9 @@ $(document).ready(function() {
     $("#analysis_data").text(family);
   });
 
-  function key_action(row, def, method) {
+  function key_action(row, method, default_selector) {
     if (row == null) {
-      row = def;
-      row.trigger('click');
+      $(default_selector).trigger('click');
     } else {
       jmolInlineLoader.checkbox_click(row.attr('id'));
       row[method]().trigger('click');
@@ -78,16 +89,16 @@ $(document).ready(function() {
   }
 
   key('down', function() {
-    return key_action(selected_row, $('#position-table tbody tr:first'), 'next');
+    return key_action(selected_row, 'next', '#position-table tbody tr:first');
   });
 
   key('up', function() {
-    return key_action(selected_row, $('#position-table tbody tr:last'), 'prev');
+    return key_action(selected_row, 'prev', '#position-table tbody tr:last');
   });
 
   // jmol
   jmolInlineLoader.initialize({
-    chbxClass: 'load_analysis_image',
+    chbxClass: 'nt',
     serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
     neighborhoodButtonId: 'neighborhood'
   });

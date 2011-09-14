@@ -64,15 +64,20 @@
                   %label{id: 'structure-list'} Structures
                   .input
                     %ul{class: 'inputs-list'}
-                      %li 
+                      %li
                         %label
-                          %input{type: 'checkbox', class: 'display-nt', id: 'ec-box', name: 'ec', value: 'ec'}
+                          %input{type: 'checkbox', id: 'ec-box', name: 'ec', value: 'ec'}
                           %span E. coli
                       %li
                         %label
-                          %input{type: 'checkbox', class: 'display-nt', id: 'tt-box', name: 'tt', value: 'tt'}
+                          %input{type: 'checkbox', id: 'tt-box', name: 'tt', value: 'tt'}
                           %span T. thermus
+                      %li
+                        %input{type: 'checkbox', class: 'display-nt previous-ec', hidden: true}
+                        %input{type: 'checkbox', class: 'display-nt current-ec', hidden: true}
+                        %input{type: 'checkbox', class: 'display-nt previous-tt', hidden: true}
+                        %input{type: 'checkbox', class: 'display-nt current-tt', hidden: true}
                 .clearfix
                   .input
-                    %input{type: 'button', id: 'neighborhood', name: 'neighborhood', 
+                    %input{type: 'button', id: 'neighborhood', name: 'neighborhood',
                       class: 'btn', value: 'Show Neighborhood'}

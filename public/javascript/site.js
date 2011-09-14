@@ -8,7 +8,7 @@ $.tablesorter.addParser({
 $.tablesorter.addParser({
   id: 'bpfamily',
   is: function(s) { return false; },
-  format: function(s) { 
+  format: function(s) {
     return s.toLowerCase().
       replace(/cww/,1).
       replace(/tww/,2).
@@ -29,10 +29,12 @@ $.tablesorter.addParser({
 $(document).ready(function() {
 
   var selected_row = null;
+  var previous_row = null;
+  var data_key = 'data_nt';
 
-  $("#position-table").tablesorter({ 
+  $("#position-table").tablesorter({
     sortList: [[0, 0]],
-    headers: { 
+    headers: {
       2: { sorter: 'bpfamily' },
       6: { sorter: 'bpfamily' }
     }
@@ -40,17 +42,38 @@ $(document).ready(function() {
 
   $("#position-search").quicksearch("#position-table tbody tr");
 
-  function show_nt(id, nts) {
-    var box = $(id);
-    box.attr("data-nt", nts);
-    if (box.is(':checked')) { // Do this twice so we toggle back to the orginal state
-      jmolInlineLoader.checkbox_click(box.attr('id'));
-      jmolInlineLoader.checkbox_click(box.attr('id'));
-    }
+  function update_nt_data (selector, data) {
+    $(selector).attr(data_key, data);
+    $(selector).attr('id', data.replace(/,/g, '-'));
   }
 
+  function watch_box(box_selector, cur_selector, prev_selector) {
+    $(box_selector).click(function() {
+      $(cur_selector).trigger('click');
+      $(prev_selector).trigger('click');
+      $(prev_selector).trigger('click');
+    });
+  }
+
+  watch_box("#ec-box", ".current-ec", ".previous-ec");
+  watch_box("#tt-box", ".current-tt", ".previous-tt");
+
   $(".load_analysis_image").click(function(){
+    if (selected_row && $(this).attr('id') == selected_row.attr('id')) {
+      return false;
+    }
+
+    previous_row = selected_row;
     selected_row = $(this);
+
+    if (previous_row) {
+      update_nt_data(".previous-ec", previous_row.attr('ec'));
+      update_nt_data(".previous-tt", previous_row.attr('tt'));
+    }
+
+    update_nt_data(".current-ec", selected_row.attr("ec"));
+    update_nt_data(".current-tt", selected_row.attr("tt"));
+
     var row_id = $(this).attr('id');
     var ind_id = row_id.replace(/\-\w+/, '');
     var pos1 = $("#" + ind_id + "-epos1");
@@ -66,24 +89,12 @@ $(document).ready(function() {
 
     $("#analysis_image").attr('src', img_src);
     $("#analysis_data").text(pos1.text() + ' ' + pos2.text());
-
-    // Update data-nts for checkboxes
-    show_nt("#ec-box", $(this).attr("ec"));
-    show_nt("#tt-box", $(this).attr("tt"));
-  });
-
-  $(".load_family_image").click(function(){
-    var family = $(this).text();
-    var img_src = base_image() + 'families/' + family + '.png';
-    $("#analysis_image").attr('src', img_src);
-    $("#analysis_data").text(family);
   });
 
   function key_action(row, method, default_selector) {
     if (row == null) {
       $(default_selector).trigger('click');
     } else {
-      jmolInlineLoader.checkbox_click(row.attr('id'));
       row[method]().trigger('click');
     }
     return false;
@@ -103,9 +114,6 @@ $(document).ready(function() {
     serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
     neighborhoodButtonId: 'neighborhood'
   });
-
-  // Work around to clean out initial display
-  // jmolInlineLoader.checkbox_click($('.load_analysis_image').attr('id'));
 });
 
 function base_image() {

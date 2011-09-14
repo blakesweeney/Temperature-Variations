@@ -30,7 +30,7 @@ $(document).ready(function() {
 
   var selected_row = null;
   var previous_row = null;
-  var data_key = 'data_nt';
+  var data_key = 'data-nt';
 
   $("#position-table").tablesorter({
     sortList: [[0, 0]],
@@ -50,6 +50,7 @@ $(document).ready(function() {
   function watch_box(box_selector, cur_selector, prev_selector) {
     $(box_selector).click(function() {
       $(cur_selector).trigger('click');
+      // Toggle the prev so we always hide the previous structures
       $(prev_selector).trigger('click');
       $(prev_selector).trigger('click');
     });

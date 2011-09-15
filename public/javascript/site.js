@@ -110,11 +110,11 @@ $(document).ready(function() {
   });
 
   // jmol
-  jmolInlineLoader.initialize({
-    chbxClass: 'display-nt',
-    serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
-    neighborhoodButtonId: 'neighborhood'
-  });
+  // jmolInlineLoader.initialize({
+  //   chbxClass: 'display-nt',
+  //   serverUrl: 'http://rna.bgsu.edu/Motifs/jmolInlineLoader/nt_coord.php',
+  //   neighborhoodButtonId: 'neighborhood'
+  // });
 });
 
 function base_image() {

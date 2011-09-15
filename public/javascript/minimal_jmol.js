@@ -1,9 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-
 var jmolInlineLoader = function(){
 
 	var models       = new Array();
@@ -17,9 +11,6 @@ var jmolInlineLoader = function(){
 		serverUrl   : 'http://rna.bgsu.edu/research/anton/MotifAtlas/nt_coord.php',
 		chbxClass   : '',
 		neighborhoodButtonId: '',
-		showNextButtonId: '',
-		showPreviousButtonId: '',
-		showAllButtonId: ''
     };
 
 	// "Private" class. Stores the state of each checkbox.
@@ -127,19 +118,7 @@ var jmolInlineLoader = function(){
 			models[id].set_neighborhood(neighborhood);
 			models[id].display($(this).attr('checked'));
 		}
-
 	}
-	
-	this.superimpose_all = function () {
-		
-		for (id in models) {
-			models[id].superimpose();
-			models[id].style();
-			models[id].toggle_view();
-		}
-		jmolScript('center 1.1;');
-		
-	}	
 
 	this.toggle_neighborhood = function() {
 
@@ -155,7 +134,6 @@ var jmolInlineLoader = function(){
 			models[id].set_neighborhood(neighborhood);
 			models[id].toggle_view();
 		}
-
 	}
 
 	this.initialize = function(options) {
@@ -163,10 +141,10 @@ var jmolInlineLoader = function(){
 		if ( options ) {
 			settings = $.extend( {}, defaults, options );
 		}
-   		jmolScript('set baseCartoonEdges = true;');
+    jmolScript('set baseCartoonEdges = true;');
 
 		$(document).ajaxStop(function() {
-			superimpose_all();			  
+			superimpose_all();
 		});
 
    		settings.chbxClass = '.' + settings.chbxClass;
@@ -178,96 +156,6 @@ var jmolInlineLoader = function(){
    			settings.neighborhoodButtonId = '#' + settings.neighborhoodButtonId;
 	   		$(settings.neighborhoodButtonId).click(jmolInlineLoader.toggle_neighborhood);
    		}
-   		if ( settings.showNextButtonId != '' ) {
-   			settings.showNextButtonId = '#' + settings.showNextButtonId;
-	   		$(settings.showNextButtonId).click(jmolInlineLoader.show_next);
-   		}
-   		if ( settings.showPreviousButtonId != '' ) {
-   			settings.showPreviousButtonId = '#' + settings.showPreviousButtonId;
-	   		$(settings.showPreviousButtonId).click(jmolInlineLoader.show_prev);
-   		}
-   		if ( settings.showAllButtonId != '' ) {
-   			settings.showAllButtonId = '#' + settings.showAllButtonId;
-	   		$(settings.showAllButtonId).click(jmolInlineLoader.toggle_all);
-   		}
-
-	}
-
-	this.show_next = function() {
-
-		var chbx = $(settings.chbxClass);
-		var toCheck = new Array();
-		for (var i=0;i<chbx.length-1;i++) {
-			if ( chbx[i].checked ) {
-				toCheck.push(i+1);
-				checkbox_click(chbx[i].id);
-			}
-		}
-		if ( chbx[chbx.length-1].checked ) {
-			toCheck.push(0);
-			checkbox_click(chbx[chbx.length-1].id);
-		}		
-		$(settings.chbxClass + ':checked').removeAttr('checked');
-
-		for (i=0;i<toCheck.length;i++) {
-			chbx[toCheck[i]].checked = true;
-			checkbox_click(chbx[toCheck[i]].id);
-		}
-		if ( $(settings.chbxClass + ':checked').length == 0 ) {
-			chbx[0].checked = true;
-			checkbox_click(chbx[0].id);
-		}
-
-	}
-
-	this.show_prev = function () {
-
-		var chbx = $(settings.chbxClass);
-		var toCheck = new Array();
-		// loop over all checkboxes except for the first one
-		for (var i=chbx.length-1;i>=1;i--) {
-			if ( chbx[i].checked ) {
-				toCheck.push(i-1);
-				checkbox_click(chbx[i].id);
-			}
-		}
-		// separate handling of the first checkbox
-		if ( chbx[0].checked ) {
-			toCheck.push(chbx.length-1);
-			checkbox_click(chbx[0].id);
-		}		
-		// temporarily uncheck everything
-		$(settings.chbxClass+':checked').removeAttr('checked');
-		// check only the right ones
-		for (i=0;i<toCheck.length;i++) {
-			chbx[toCheck[i]].checked = true;
-			checkbox_click(chbx[toCheck[i]].id);
-		}
-		// keep the last checkbox checked if all others are unchecked
-		if ( $(settings.chbxClass+':checked').length == 0 ) {
-			chbx[chbx.length-1].checked = true;
-			checkbox_click(chbx[chbx.length-1].id);
-		}
-	}
-
-	this.toggle_all = function () {
-
-		var all = $(settings.chbxClass);
-		if ( all.length == $(settings.chbxClass + ':checked').length ) {
-			// hide all
-			this.value = 'Show all';
-			all.each( function(i) {
-				this.checked = false;
-				checkbox_click(this.id);
-			});
-		} else {
-			// show all
-			this.value = 'Hide all';
-			$(settings.chbxClass+':not(:checked)').each( function(i) {
-				this.checked = true;
-				checkbox_click(this.id);				
-			});
-		}
 	}
 
 	return {
@@ -280,4 +168,3 @@ var jmolInlineLoader = function(){
 	}
 
 }();
-

@@ -103,9 +103,9 @@ var jmolInlineLoader = function(){
 		}
 
 		this.display = function() {
-			self.toggle_checked();
+			// self.toggle_checked();
 			self.toggle_view();
-			self.toggle_checkbox();
+			// self.toggle_checkbox();
 		}
 
 	} // end of the model private class

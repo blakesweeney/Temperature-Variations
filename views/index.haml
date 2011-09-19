@@ -18,7 +18,7 @@
           %tbody
             - @data.each_with_index do |point, index|
               - ec_nts = point['positions'].map { |p| '2AW7_1_A_' + p }.join(',')
-              - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A' + p }.join(',')
+              - tt_nts = point['aligned_to']['positions'].map { |p| '1J5E_1_A_' + p }.join(',')
               %tr{id: index.to_s, class: 'load_analysis_image', ec: ec_nts, tt: tt_nts }
                 %td{:id => index.to_s + '-epos1'}= point['positions'][0]
                 %td{:id => index.to_s + '-epos2'}= point['positions'][1]
@@ -38,8 +38,8 @@
         %ul{class: 'tabs'}
           %li{class: 'active'}
             %a{href: '#'} Interaction
-          %li
-            %a{href: '#'} Summary
+          -# %li
+          -#   %a{href: '#'} Summary
 
     .row
       %br
@@ -75,17 +75,12 @@
                     %ul{class: 'inputs-list'}
                       %li
                         %label
-                          %input{type: 'checkbox', id: 'ec-box', name: 'ec', value: 'ec'}
+                          %input{type: 'checkbox', id: 'ec-box', class: 'display-nt', name: 'ec', value: 'ec'}
                           %span E. coli
                       %li
                         %label
-                          %input{type: 'checkbox', id: 'tt-box', name: 'tt', value: 'tt'}
+                          %input{type: 'checkbox', id: 'tt-box', class: 'display-nt', name: 'tt', value: 'tt'}
                           %span T. thermus
-                      %li
-                        %input{type: 'checkbox', class: 'display-nt previous-ec', hidden: true}
-                        %input{type: 'checkbox', class: 'display-nt current-ec', hidden: true}
-                        %input{type: 'checkbox', class: 'display-nt previous-tt', hidden: true}
-                        %input{type: 'checkbox', class: 'display-nt current-tt', hidden: true}
                 .clearfix
                   .input
                     %input{type: 'button', id: 'neighborhood', name: 'neighborhood',
